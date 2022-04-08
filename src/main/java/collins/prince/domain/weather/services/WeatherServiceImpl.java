@@ -3,6 +3,7 @@ package collins.prince.domain.weather.services;
 import collins.prince.domain.weather.exception.HttpClientErrorException;
 import collins.prince.domain.weather.models.WeatherApiResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ import java.util.Optional;
 public class WeatherServiceImpl implements WeatherService{
     private RestTemplate restTemplate;
 
+    @Value("${weather.api.key}")
+    private String apiKey;
+
     public WeatherServiceImpl() {
         restTemplate = new RestTemplate();
     }
@@ -23,7 +27,6 @@ public class WeatherServiceImpl implements WeatherService{
     @Override
     public Optional<WeatherApiResponse> requestDataFromApi(String lat, String lon) {
         try {
-            String apiKey = "e811db3684a33773f403956e9a452f1c";
             String url = "https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s&unit=imperial";
             String requestUrl = String.format(url, lat, lon, apiKey);
             ResponseEntity<WeatherApiResponse> response = restTemplate.exchange(requestUrl, HttpMethod.GET, null, WeatherApiResponse.class);
