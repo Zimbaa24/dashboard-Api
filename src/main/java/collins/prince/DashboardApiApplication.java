@@ -1,36 +1,32 @@
 package collins.prince;
 
-import collins.prince.domain.weather.models.WeatherApiResponse;
-import collins.prince.domain.weather.services.WeatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Optional;
-
 
 @SpringBootApplication
-public class DashboardApiApplication implements CommandLineRunner {
+public class DashboardApiApplication {
 	private static Logger log = LoggerFactory.getLogger(DashboardApiApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(DashboardApiApplication.class, args);
 	}
 
-	@Autowired
-	private WeatherService weatherService;
+//	@Autowired
+//	private WeatherService weatherService;
+//
+//	@Override
+//	public void run(String... args) throws Exception {
+//		Optional<WeatherApiResponse> response = weatherService.requestDataFromApi("39.7447", "-75.5484");
+//		if (response.isEmpty()) {
+//			log.info("No Beuno");
+//			return;
+//		}
+//		WeatherApiResponse data = response.get();
+//		log.info(data.toString());
+//	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		Optional<WeatherApiResponse> reponse = weatherService.requestDataFromApi("39.7447", "-75.5484");
-		if (reponse.isEmpty()) {
-			log.info("No Beuno");
-			return;
-		}
-		WeatherApiResponse data = reponse.get();
-		log.info(data.toString());
-	}
+
 }
